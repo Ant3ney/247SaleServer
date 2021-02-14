@@ -10,7 +10,9 @@ var bodyParser = require("body-parser"),
 	mongoose = require("mongoose"),
 	passport = require("passport"),
 	User = require("./models/users"),
-	expressSession = require("express-session")
+	expressSession = require("express-session"),
+	cronJobs = require('./utilitys/cronJobs'),
+	dealRoutes = require('./routs/deals');
 
 //passport setup
 app.use(expressSession({
@@ -47,10 +49,11 @@ mongoose.connect(process.env.DBURL, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
-}).then(() => {
+}).then(async () => {
 	console.log("MongoDB has concected!");
+	cronJobs.dayCron();
 	//Remove all users
-	User.remove({}, (err) => {
+	/*User.remove({}, (err) => {
 		if(err){
 			console.log("Something went wrong");
 			console.log(err.message);
@@ -61,7 +64,7 @@ mongoose.connect(process.env.DBURL, {
 				console.log(users);
 			});
 		}
-	});
+	});*/
 
 }).catch((err) => {
 	console.log("Something went wrong");
@@ -75,10 +78,11 @@ var authenticationRouts = require("./routs/authentication"),
 //using routs files
 app.use(authenticationRouts);
 app.use(indexRouts);
+app.use('/deals', dealRoutes);
 
 //app setings
 app.set("view engine", "ejs");
 
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
-	console.log("Server has started!");
+	console.log(`Server has started on ${process.env.PORT}!`);
 });
