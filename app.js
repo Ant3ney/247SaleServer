@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 	//populate req.app.loacls with app info
 	req.app.locals.currentUser = req.user;
 
-	res.setHeader('Access-Control-Allow-Origin', "http://localhost:3000");
+	res.setHeader('Access-Control-Allow-Origin', "https://twentyfourseven-sale-67425.herokuapp.com");
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
