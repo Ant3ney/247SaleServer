@@ -12,9 +12,11 @@ var bodyParser = require("body-parser"),
 	User = require("./models/users"),
 	expressSession = require("express-session"),
 	cronJobs = require('./utilitys/cronJobs'),
-	dealRoutes = require('./routs/deals');
+	dealRoutes = require('./routs/deals'),
+	cors = require('./config/cors');
 
 //passport setup
+cors(app);
 app.use(expressSession({
 	secret: "Login app",
 	resave: false,
@@ -34,10 +36,6 @@ app.use((req, res, next) => {
 	//populate req.app.loacls with app info
 	req.app.locals.currentUser = req.user;
 
-	res.setHeader('Access-Control-Allow-Origin', "https://247-sale.netlify.app");
-	res.setHeader('Access-Control-Allow-Credentials', true);
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
 app.use(bodyParser.urlencoded({extended: true}));

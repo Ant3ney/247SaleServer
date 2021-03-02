@@ -8,8 +8,6 @@ let saleIndexes = [];
 let globalDeals = {};
 
 exports.dayCron = async () => {
-    getAndSetSpecialDealIndexes();
-    console.log('here -1');
     cron.schedule('* * * */23 * *', () => {
         console.log('Here');
         getAndSetSpecialDealIndexes();
