@@ -5,9 +5,7 @@ module.exports =  function configure(app){
 
     app.use(async (req, res, next) => {
         var host = await req.headers.origin;
-        console.log('host: ' + host);
         let origin = '';
-        console.log('origin: ' + host);
         //populate req.app.loacls with app info
         req.app.locals.currentUser = req.user;
     

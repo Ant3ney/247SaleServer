@@ -8,11 +8,7 @@ let saleIndexes = [];
 let globalDeals = {};
 
 exports.dayCron = async () => {
-    let task = cron.schedule('* * * */23 * *', () => {
-        console.log('Here');
-        getAndSetSpecialDealIndexes();
-    });
-    task.start();
+    getAndSetSpecialDealIndexes();
 }
 
 let getAndSetSpecialDealIndexes = async () => {
@@ -62,6 +58,7 @@ async function createFeaturedDeal(){
     saleIDs = await getFeaturedIDIndexesThatAreOnSale(featuredIds);
     let featuredIndex;
     if(saleIDs.length <= 0){
+        console.log('No game in featured list is on sale');
         featuredId = featuredIds[Math.floor(Math.random() * (featuredIds.length - 1))];
     }
     else{

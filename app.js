@@ -49,7 +49,7 @@ mongoose.connect(process.env.DBURL, {
 	useUnifiedTopology: true
 }).then(async () => {
 	console.log("MongoDB has concected!");
-	cronJobs.dayCron();
+	//cronJobs.dayCron();
 	//Remove all users
 	/*User.remove({}, (err) => {
 		if(err){
@@ -68,6 +68,25 @@ mongoose.connect(process.env.DBURL, {
 	console.log("Something went wrong");
 	console.log(err.message);
 });
+
+
+//Allow commands
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+process.stdin.on('data', function (text) {
+	if (text.trim() === 'run_day_cron') {
+		cronJobs.dayCron();
+	}
+  if (text.trim() === 'quit') {
+    done();
+  }
+});
+
+function done() {
+  console.log('Now that process.stdin is paused, there is nothing more to do.');
+  process.exit();
+}
 
 //Handling routs
 //route file locations
