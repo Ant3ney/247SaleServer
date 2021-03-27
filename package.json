@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "run_day_cron": "node commands/day_cron.js"
+    "day_cron": "node commands/day_cron.js"
   },
   "author": "Anthony Cavuoti",
   "license": "ISC",
