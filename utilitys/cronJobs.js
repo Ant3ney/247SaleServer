@@ -90,8 +90,9 @@ async function getIdsOfFeaturedNames() {
       let deal = await data.json();
       if (!deal[0]) {
          continue;
+      } else {
+         featuredIds.push(deal[0].cheapestDealID);
       }
-      featuredIds.push(deal[0].cheapestDealID);
    }
    return featuredIds;
 }
