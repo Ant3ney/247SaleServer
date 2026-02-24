@@ -15,8 +15,12 @@ var bodyParser = require("body-parser"),
 	dealRoutes = require('./routs/deals'),
 	cors = require('./config/cors');
 
+app.use(cors({
+  origin: 'https://247-sale.netlify.app',
+  credentials: true // Required if you are sending cookies or authorization headers
+}));
+
 //passport setup
-cors(app);
 app.use(expressSession({
 	secret: "Login app",
 	resave: false,
